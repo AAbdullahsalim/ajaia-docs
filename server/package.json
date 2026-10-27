@@ -1,0 +1,25 @@
+{
+  "name": "ajaia-docs-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend for the Ajaia collaborative document editor",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "marked": "^14.1.2",
+    "multer": "^1.4.5-lts.1",
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.2"
+  }
+}
