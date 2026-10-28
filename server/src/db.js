@@ -1,5 +1,4 @@
 import Database from 'better-sqlite3';
-import { nanoid } from 'nanoid';
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -42,17 +41,20 @@ db.exec(`
 
 // Seed a few demo accounts so reviewers can exercise the sharing flow
 // without a real signup system. Mocked auth — documented in the README.
+// IDs are STABLE (not random) so that a login token (which is the user id)
+// stays valid across restarts/redeploys even when the DB is recreated on
+// hosts with an ephemeral filesystem.
 const SEED_USERS = [
-  { email: 'alice@ajaia.test', name: 'Alice Owner' },
-  { email: 'bob@ajaia.test', name: 'Bob Collaborator' },
-  { email: 'carol@ajaia.test', name: 'Carol Reviewer' },
+  { id: 'user-alice', email: 'alice@ajaia.test', name: 'Alice Owner' },
+  { id: 'user-bob', email: 'bob@ajaia.test', name: 'Bob Collaborator' },
+  { id: 'user-carol', email: 'carol@ajaia.test', name: 'Carol Reviewer' },
 ];
 
 const insertUser = db.prepare(
   'INSERT OR IGNORE INTO users (id, email, name) VALUES (@id, @email, @name)'
 );
 for (const u of SEED_USERS) {
-  insertUser.run({ id: nanoid(), email: u.email, name: u.name });
+  insertUser.run(u);
 }
 
 export default db;

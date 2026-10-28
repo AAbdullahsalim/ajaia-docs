@@ -25,6 +25,20 @@ async function request(method, path, body) {
   }
 
   const res = await fetch(`/api${path}`, opts);
+
+  // A stale/invalid token (e.g. after the demo server restarted and reseeded)
+  // should drop the user back to the login screen rather than wedging the UI.
+  if (res.status === 401) {
+    setToken(null);
+    try {
+      localStorage.removeItem('ajaia.user');
+    } catch {
+      /* ignore */
+    }
+    window.location.reload();
+    return null;
+  }
+
   if (res.status === 204) return null;
 
   const data = await res.json().catch(() => ({}));
