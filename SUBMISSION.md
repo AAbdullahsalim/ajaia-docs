@@ -12,9 +12,10 @@
 
 ## Links
 
-- **Live demo:** [ADD DEPLOYMENT URL]
+- **Live demo:** https://ajaia-docs-qwny.onrender.com
+- **Repo:** https://github.com/AAbdullahsalim/ajaia-docs
 - **Walkthrough video:** [ADD UNLISTED LOOM / YOUTUBE URL]
-- **Repo / Drive folder:** [ADD LINK]
+- **Drive folder:** [ADD LINK]
 
 ## Test accounts (mocked auth — no passwords)
 
