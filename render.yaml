@@ -1,0 +1,14 @@
+# Render Blueprint. On the free plan the filesystem is ephemeral (the SQLite DB
+# resets on restart/redeploy — fine for a demo; seed users are recreated on boot).
+# For durable data, upgrade the service and add a Disk mounted at /data, then set
+# DB_PATH=/data/app.db.
+services:
+  - type: web
+    name: ajaia-docs
+    runtime: node
+    plan: free
+    buildCommand: npm run setup && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production

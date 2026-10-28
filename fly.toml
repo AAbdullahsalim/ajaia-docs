@@ -1,0 +1,22 @@
+# Fly.io config. `fly launch` will set the real app name/region; this is a base.
+app = "ajaia-docs"
+primary_region = "sin"   # Singapore — close to the client
+
+[build]
+
+[env]
+  PORT = "4000"
+  DB_PATH = "/data/app.db"
+
+[http_service]
+  internal_port = 4000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+# Persistent volume for the SQLite file (create with:
+#   fly volumes create ajaia_data --size 1 --region sin)
+[mounts]
+  source = "ajaia_data"
+  destination = "/data"
